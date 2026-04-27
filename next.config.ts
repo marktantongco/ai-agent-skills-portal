@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Use "export" for GitHub Pages static export
+  // Remove "output" field for Vercel deployment (Vercel handles its own build)
   output: "export",
-  /* config options here */
   typescript: {
     ignoreBuildErrors: true,
   },
