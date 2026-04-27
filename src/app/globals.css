@@ -41,6 +41,20 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* promptc-os inspired animation timing tokens */
+  --animate-fade-in-up: fadeInUp 0.5s ease-out both;
+  --animate-fade-in: fadeIn 0.4s ease-out both;
+  --animate-fade-in-scale: fadeInScale 0.3s ease-out both;
+  --animate-shimmer: shimmer 1.5s infinite linear;
+  --animate-subtle-glow: subtleGlow 3s infinite ease-in-out;
+  --animate-btn-press: btnPress 0.08s ease-out;
+  --animate-copy-ripple: copyRipple 0.5s ease-out both;
+  --animate-zone-slide-in: zoneSlideIn 0.35s ease-out both;
+  --animate-border-glow: borderGlow 2s infinite ease-in-out;
+  --animate-status-blink: statusBlink 1.5s infinite ease-in-out;
+  --animate-badge-pop: badgePop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-shimmer-border: shimmerBorder 3s infinite linear;
 }
 
 :root {
@@ -111,6 +125,487 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
+
+/* ============================================================
+   promptc-os Inspired Keyframe Animations
+   ============================================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes subtleGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(167, 139, 250, 0.08), 0 0 20px rgba(167, 139, 250, 0.04);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(167, 139, 250, 0.18), 0 0 40px rgba(167, 139, 250, 0.08);
+  }
+}
+
+@keyframes btnPress {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes copyRipple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes zoneSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: rgba(167, 139, 250, 0.2);
+  }
+  50% {
+    border-color: rgba(167, 139, 250, 0.55);
+  }
+}
+
+@keyframes statusBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes badgePop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmerBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ============================================================
+   Custom Utility Classes
+   ============================================================ */
+
+/* Hide scrollbar */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Fade edges on scroll container */
+.scroll-fade-container {
+  position: relative;
+  overflow: auto;
+}
+.scroll-fade-container::before,
+.scroll-fade-container::after {
+  content: "";
+  position: sticky;
+  left: 0;
+  right: 0;
+  height: 24px;
+  pointer-events: none;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.scroll-fade-container::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--background), transparent);
+}
+.scroll-fade-container::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--background), transparent);
+}
+
+/* Animation utilities */
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out both;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.3s ease-out both;
+}
+
+/* Button press effect */
+.btn-press {
+  transition: transform 0.08s ease-out;
+}
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.2s ease-out;
+}
+.hover-lift:hover {
+  transform: translateY(-0.125rem);
+}
+
+/* Subtle glow on cards */
+.subtle-glow {
+  animation: subtleGlow 3s infinite ease-in-out;
+}
+
+/* Card glow effect on hover */
+.card-glow {
+  transition: box-shadow 0.3s ease-out;
+}
+.card-glow:hover {
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.15), 0 0 40px rgba(167, 139, 250, 0.07);
+}
+
+/* Card scale on hover */
+.card-scale {
+  transition: transform 0.2s ease-out;
+}
+.card-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Copy confirmation animations */
+.copy-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.copy-ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(167, 139, 250, 0.3);
+  animation: copyRipple 0.5s ease-out both;
+  pointer-events: none;
+}
+
+.copy-flash {
+  animation: copyRipple 0.5s ease-out both;
+}
+
+/* Skeleton shimmer loading animation */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--muted) 25%,
+    var(--accent) 37%,
+    var(--muted) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: var(--radius);
+}
+
+/* Badge pop-in animation */
+.badge-pop {
+  animation: badgePop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Keyboard shortcut badge styling */
+.kbd-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.375rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--muted-foreground);
+  background: var(--muted);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+/* Animated gradient shimmer border */
+.shimmer-border {
+  position: relative;
+  border: none;
+  background-clip: padding-box;
+}
+.shimmer-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(167, 139, 250, 0.1),
+    rgba(77, 255, 255, 0.3),
+    rgba(167, 139, 250, 0.3),
+    rgba(77, 255, 255, 0.1),
+    rgba(167, 139, 250, 0.1)
+  );
+  background-size: 300% 100%;
+  animation: shimmerBorder 3s infinite linear;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Pulsing border glow */
+.border-glow-pulse {
+  animation: borderGlow 2s infinite ease-in-out;
+}
+
+/* Status dot blinking */
+.status-blink {
+  animation: statusBlink 1.5s infinite ease-in-out;
+}
+
+/* Active tab indicator */
+.tab-indicator {
+  position: relative;
+}
+.tab-indicator::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #a78bfa;
+  border-radius: 1px;
+  animation: fadeInScale 0.3s ease-out both;
+}
+
+/* ============================================================
+   Frosted Glass Utilities
+   ============================================================ */
+
+.glass {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.glass-heavy {
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.glass-card {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+}
+
+/* Dark mode glass adjustments */
+.dark .glass {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.dark .glass-heavy {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.dark .glass-card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   Neon Glow Utilities
+   ============================================================ */
+
+.glow-violet {
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.4), 0 0 32px rgba(167, 139, 250, 0.15);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 12px rgba(77, 255, 255, 0.4), 0 0 32px rgba(77, 255, 255, 0.15);
+}
+
+.glow-lime {
+  box-shadow: 0 0 12px rgba(204, 255, 0, 0.4), 0 0 32px rgba(204, 255, 0, 0.15);
+}
+
+.glow-amber {
+  box-shadow: 0 0 12px rgba(255, 176, 0, 0.4), 0 0 32px rgba(255, 176, 0, 0.15);
+}
+
+.text-glow-violet {
+  text-shadow: 0 0 8px rgba(167, 139, 250, 0.5), 0 0 20px rgba(167, 139, 250, 0.2);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 8px rgba(77, 255, 255, 0.5), 0 0 20px rgba(77, 255, 255, 0.2);
+}
+
+/* ============================================================
+   Custom Scrollbar Styling
+   ============================================================ */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ============================================================
+   Scroll Progress Bar Styling
+   ============================================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #a78bfa, #4DFFFF, #a78bfa);
+  background-size: 200% 100%;
+  animation: shimmerBorder 3s infinite linear;
+  z-index: 9999;
+  border-radius: 0 2px 2px 0;
+  transition: width 0.1s ease-out;
+}
+
+/* ============================================================
+   Selection Color Styling
+   ============================================================ */
+
+::selection {
+  background: rgba(167, 139, 250, 0.3);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(167, 139, 250, 0.3);
+  color: inherit;
+}
+
+/* ============================================================
+   WCAG AA Focus Styling
+   ============================================================ */
+
+*:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   Touch Target Sizing
+   ============================================================ */
+
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* ============================================================
+   Base Layer
+   ============================================================ */
 
 @layer base {
   * {
