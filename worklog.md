@@ -248,3 +248,60 @@ Stage Summary:
 - Skill Combo Generator with interactive skill picker
 - 12 Skill Playbooks with trigger commands and copy-ready chains
 - Web app v3.0 rebuilt and serving at localhost:3000
+
+---
+Task ID: 8
+Agent: Main Agent
+Task: Dual-site architecture — Public Landing Page + Developer Portal (promptc-os inspired)
+
+Work Log:
+- Researched promptc-os GitHub repository and its design framework
+- Identified design system: Neo-Brutalist + Cyberpunk Terminal hybrid
+  - Void black backgrounds (#0a0a0a, #0f0f0f, #181818)
+  - Electric lime accent (#ccff00), cyan secondary (#00ffff)
+  - Zero border radius, offset shadows, neon-tinted borders
+  - Terminal/CLI blocks with macOS dots, monospace labels with extreme letter-spacing
+  - Typography-first design, dark-mode native, one accent per screen
+- Created shared data module at /home/z/my-project/src/lib/skills-data.ts (341 lines)
+  - All 82 skills, 25 stacks, 16 playbooks (4 new), 8 router commands
+  - FAQ data (10 GEO-optimized Q&As)
+  - Helper functions (getCatColor, getHealthBadge)
+  - All type interfaces exported
+- Added 4 new playbooks: Idea Validator, API Architect, Visual Story, Market Scout
+- Built Public Landing Page at / (src/app/page.tsx, 1187 lines):
+  - 16 sections: Hero → Router → Playbooks → Combo Generator → Stacks → Top Skills → Compatibility → ROI → Analysis → Upgrades → Errors → Escalation → Dependencies → Healing → FAQ → Directory
+  - Floating side nav with lucide icons per section
+  - Minimal top bar with "Developer View" link to /dev
+  - Combo Generator with compatibility check, smart suggestions, reorder, multi-format copy
+  - Copy-ready on EVERY item including conflicts, healing, ROI, FAQ
+  - Dark mode toggle, IntersectionObserver section tracking
+  - Mobile responsive
+- Built Developer Portal at /dev (src/app/dev/page.tsx, 1020 lines):
+  - Same 16 sections with neo-brutalist terminal UI
+  - Section labels: 001 — HERO, 002 — ROUTER, etc.
+  - Terminal blocks with macOS dots and ❯ prompts
+  - Copy buttons as [copy] text (not icons)
+  - Zero border radius everywhere (rounded-none)
+  - Offset shadows on hover (6px 6px 0 rgba(204,255,0,.15))
+  - Neon-tinted borders (rgba(204,255,0,.2))
+  - Monospace labels with tracking-[0.3em] uppercase
+  - Dark-mode only (no light toggle)
+  - Link back to "/" public page
+  - Left sidebar nav with tiny monospace section labels
+- Enhanced layout.tsx with comprehensive SEO/GEO:
+  - 5 JSON-LD schemas: WebApplication, SoftwareApplication, ItemList (82 skills), FAQPage (10 FAQs), HowTo (4 steps)
+  - metadataBase, applicationName, sitemap reference
+  - Enhanced OpenGraph and Twitter cards
+  - 30+ keywords including long-tail GEO terms
+  - Preconnect links for fonts and CDN
+- Build verified — both pages compile and serve successfully
+
+Stage Summary:
+- 2 separate pages: / (public) and /dev (developer), same content, different UI/UX
+- Public: gradient hero, glass morphism, color-coded categories, shadcn/ui components
+- Developer: neo-brutalist terminal UI, #ccff00 accent, zero radius, CLI blocks, monospace labels
+- Shared data module (341 lines) eliminates duplication
+- 4 new playbooks added (total: 16)
+- Enhanced SEO/GEO with 5 JSON-LD schemas, 10 FAQs, HowTo guide
+- Copy-ready on every item across both pages
+- Both pages link to each other via navigation
