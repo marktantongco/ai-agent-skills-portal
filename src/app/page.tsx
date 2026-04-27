@@ -122,6 +122,7 @@ const INSTALLED_SKILLS: Skill[] = [
   { name: "writing-plans", category: "Content", description: "Structured writing plan creation", source: "built-in", installs: "built-in" },
   { name: "podcast-generate", category: "Content", description: "Podcast content generation from text", source: "built-in", installs: "built-in" },
   { name: "marketing-mode", category: "Content", description: "Marketing strategy and execution mode", source: "built-in", installs: "built-in" },
+  { name: "gumroad-pipeline", category: "Content", description: "Digital product monetization funnel — pricing, landing pages, email sequences", source: "ai-skills-library", installs: "—", isNew: true },
 
   // Research (9)
   { name: "web-search", category: "Research", description: "Web search for real-time information retrieval", source: "built-in", installs: "built-in" },
@@ -292,10 +293,10 @@ const SKILL_COMBOS: SkillCombo[] = [
   {
     name: "Content Machine",
     emoji: "\uD83D\uDCDD",
-    skills: ["content-strategy", "seo-content-writer", "social-media-manager", "humanizer"],
-    tagline: "Plan \u2192 Write \u2192 Distribute \u2192 Polish",
-    useCase: "End-to-end content production that ranks and sounds human",
-    synergy: "content-strategy defines pillars and calendar, seo-content-writer produces optimized content, social-media-manager distributes across platforms, humanizer strips AI patterns from everything."
+    skills: ["content-strategy", "seo-content-writer", "gumroad-pipeline", "social-media-manager", "humanizer"],
+    tagline: "Plan \u2192 Write \u2192 Monetize \u2192 Distribute \u2192 Polish",
+    useCase: "End-to-end content production that ranks, converts, and sounds human",
+    synergy: "content-strategy defines pillars and calendar, seo-content-writer produces optimized content, gumroad-pipeline monetizes it, social-media-manager distributes across platforms, humanizer strips AI patterns from everything."
   },
   {
     name: "Web Scraping Pipeline",
@@ -366,7 +367,7 @@ const ONE_PROMPTS: OnePrompt[] = [
   {
     name: "Content That Converts",
     stack: "Content Machine",
-    prompt: `Install these skills for content that ranks AND sounds human:\n\n1. content-strategy \u2014 define pillars, editorial calendar, KPIs\n2. seo-content-writer \u2014 production SEO content creation\n3. social-media-manager \u2014 multi-platform execution\n4. humanizer \u2014 AI pattern stripping as quality gate\n\nTogether: Plan + Write + Distribute + Polish = content machine that never stops.`
+    prompt: `Install these skills for content that ranks AND converts:\n\n1. content-strategy \u2014 define pillars, editorial calendar, KPIs\n2. seo-content-writer \u2014 production SEO content creation\n3. gumroad-pipeline \u2014 monetize with pricing, landing pages, email sequences\n4. social-media-manager \u2014 multi-platform execution\n5. humanizer \u2014 AI pattern stripping as quality gate\n\nTogether: Plan + Write + Monetize + Distribute + Polish = content machine that converts.`
   }
 ]
 
@@ -471,6 +472,17 @@ const ERROR_STANDARDS: ErrorStandard[] = [
       { type: "PlatformLimitError", code: "SM-002", action: "Auto-truncate with ellipsis, flag for review" },
       { type: "BrandVoiceConflictError", code: "SM-003", action: "Regenerate with shared voice reference" },
       { type: "CalendarGapError", code: "SM-004", action: "Fill with evergreen content, flag as auto-filled" }
+    ]
+  },
+  {
+    skill: "gumroad-pipeline",
+    errorTypes: [
+      { type: "NoProductError", code: "GP-001", action: "Halt and prompt: what are you selling and to whom?" },
+      { type: "PricingBelowFloorError", code: "GP-002", action: "Reject price below $5, explain value perception risk" },
+      { type: "CopyLengthError", code: "GP-003", action: "Flag section too long, suggest cuts" },
+      { type: "EmailSequenceOverflowError", code: "GP-004", action: "Trim to 5 emails, flag which to cut" },
+      { type: "LowConversionWarning", code: "GP-005", action: "Generate A/B test suggestions" },
+      { type: "MissingSocialProofError", code: "GP-006", action: "Insert placeholder for real testimonial" }
     ]
   }
 ]
@@ -691,11 +703,11 @@ export default function Home() {
               <span className="text-amber-500">Skills Portal</span>
             </h1>
             <p className={`mt-5 text-lg sm:text-xl max-w-2xl leading-relaxed ${dm ? 'text-gray-400' : 'text-gray-600'}`}>
-              A directory, installation source, and stack recommendation engine for 80 production-ready agent skills. Browse, combine, and deploy.
+              A directory, installation source, and stack recommendation engine for 81 production-ready agent skills. Browse, combine, and deploy.
             </p>
             <div className="mt-8 flex flex-wrap gap-3 sm:gap-6">
               {[
-                { label: "Skills", value: "80", icon: Package },
+                { label: "Skills", value: "81", icon: Package },
                 { label: "Stacks", value: "16", icon: Layers },
                 { label: "Categories", value: "13", icon: Filter },
                 { label: "Top Install", value: "1.2M", icon: Trophy },
@@ -716,7 +728,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex gap-4 py-4 overflow-x-auto">
               {[
-                { label: "Total Skills", value: "80", sub: "installed & available" },
+                { label: "Total Skills", value: "81", sub: "installed & available" },
                 { label: "Categories", value: "13", sub: "organized domains" },
                 { label: "Curated Stacks", value: "16", sub: "synergy-optimized" },
                 { label: "Community Installs", value: "3M+", sub: "across all skills" },
@@ -859,7 +871,52 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ─── 5. FULL DIRECTORY ─── */}
+        {/* ─── 5.5 HANDOFF CHAINS ─── */}
+        <section id="chains" ref={setSectionRef("chains")} className={`py-16 sm:py-20 ${dm ? 'bg-[#0d0d0d]' : 'bg-gray-50'}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-8">
+              <div className="w-12 h-1 bg-amber-500 rounded-full mb-4" />
+              <h2 className="text-2xl sm:text-3xl font-bold">Skill Handoff Chains</h2>
+              <p className={`mt-2 ${dm ? 'text-gray-400' : 'text-gray-600'}`}>
+                The agent org chart — how skills pass work to each other
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { name: "/launch", title: "Full Product Launch", chain: ["superpowers", "frontend-design", "react-best-practices", "browser-use", "deployment-manager", "social-media-manager", "humanizer"], desc: "Spec → Design → Audit → QA → Ship → Announce → Polish" },
+                { name: "/content", title: "Content Machine", chain: ["content-strategy", "seo-content-writer", "gumroad-pipeline", "social-media-manager", "humanizer"], desc: "Plan → Write → Monetize → Distribute → Polish" },
+                { name: "/research", title: "Research to Report", chain: ["deep-research", "web-reader", "context-compressor", "output-formatter", "pdf"], desc: "Search → Extract → Distill → Format → Document" },
+                { name: "/design", title: "Design to Deploy", chain: ["brainstorming", "frontend-design", "gsap-animations", "fullstack-dev", "deployment-manager"], desc: "Ideate → Mock Up → Animate → Build → Ship" },
+                { name: "/decide", title: "Reason and Decide", chain: ["chain-of-thought", "devils-advocate", "simulation-sandbox", "output-formatter"], desc: "Decompose → Stress-Test → Verify → Structure" },
+              ].map((chain) => (
+                <Card key={chain.name} className={`${dm ? 'bg-[#1a1a1a] border-[#2a2a2a]' : 'bg-white border-gray-200'}`}>
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between">
+                      <code className="text-amber-500 font-mono text-sm font-bold">{chain.name}</code>
+                      <Terminal className="size-4 text-amber-500/60" />
+                    </div>
+                    <CardTitle className="text-base">{chain.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p className={`text-xs ${dm ? 'text-gray-500' : 'text-gray-400'}`}>{chain.desc}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {chain.chain.map((skill, i) => (
+                        <span key={skill} className="inline-flex items-center">
+                          <Badge variant="outline" className={`text-[10px] px-1.5 py-0 ${dm ? 'border-[#3a3a3a] text-gray-300' : 'border-gray-200 text-gray-700'}`}>
+                            {skill}
+                          </Badge>
+                          {i < chain.chain.length - 1 && <span className="text-amber-500/50 mx-0.5 text-[10px]">→</span>}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 5.75 FULL DIRECTORY ─── */}
         <section id="directory" ref={setSectionRef("directory")} className="py-16 sm:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
