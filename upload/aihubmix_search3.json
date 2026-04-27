@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://skills.aihubmix.com/en",
+    "name": "Discover AI Agent Skills",
+    "snippet": "Discover AI Agent Skills. A community-maintained registry of skills for AI agents. Submit from GitHub and keep everything reviewable via PRs.\nDeploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
+    "host_name": "skills.aihubmix.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://skills.aihubmix.com/zh-CN",
+    "name": "技能注册表 - Skills Registry",
+    "snippet": "通过分析代码库、生成render.yaml Blueprints并提供Dashboard深层链接，将应用程序部署到Render。当用户希望在Render的云平台上部署、托管、发布或设置其应用程序时使用。",
+    "host_name": "skills.aihubmix.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://openclawai.io/skills",
+    "name": "OpenClaw Skills Directory — 1,800+ AI Agent Skills for 2026",
+    "snippet": "Browse 5798+ community-built skills for OpenClaw AI. Search by category: ai-agents, automation, communication, creative, crypto, and more.",
+    "host_name": "openclawai.io",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://skills.aihubmix.com/ja",
+    "name": "スキルレジストリ - Skills Registry - AIHubMix",
+    "snippet": "ユーザーがRenderのクラウドプラットフォーム上でアプリケーションをデプロイ、ホスト、公開、または設定したい場合に使用します。 Jupyter Notebook Skill. documentation.",
+    "host_name": "skills.aihubmix.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/openai/skills/tree/main/skills/.curated/render-deploy",
+    "name": "skills/skills/.curated/render-deploy at main · openai/skills",
+    "snippet": "Skills Catalog for Codex. Contribute to openai/skills development by creating an account on GitHub.",
+    "host_name": "github.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://deepwiki.com/openai/skills/5.7-development-tools",
+    "name": "Development Tools | openai/skills | DeepWiki",
+    "snippet": "Development Tools skills provide specialized capabilities for technical users performing iterative development, testing, and documentation tasks. These skills emphasize: All development tools skills are available in the .curated tier and can be installed by name using $skill-installer.",
+    "host_name": "deepwiki.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://officialskills.sh/openai/skills",
+    "name": "OpenAI — 42 Agent Skills | officialskills.sh",
+    "snippet": "42 official agent skills published by OpenAI. Browse and install on officialskills.sh.",
+    "host_name": "officialskills.sh",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://research.tedneward.com/ai/llm/skills/catalog/index.html",
+    "name": "Skills Catalog - research.tedneward.com",
+    "snippet": "Catalog Advertising Direct-response advertising skills by Kim Barrett, organized into foundations, copy-chief, operator-os, orchestrators, and QA — covering avatar work, offer design, Schwartz-style copywriting, creative testing, and full-funnel campaign orchestration.",
+    "host_name": "research.tedneward.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://lobehub.com/skills/openai-skills-cloudflare-deploy",
+    "name": "cloudflare-deploy | Skills Marketplace · LobeHub",
+    "snippet": "Use it when you need to publish static sites, deploy serverless edge functions, host APIs at the edge, or set up project CI/CD and domain routing on Cloudflare.",
+    "host_name": "lobehub.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://tessl.io/skills/github/openai/skills",
+    "name": "skills • openai • Skills • Registry • Tessl",
+    "snippet": "Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys. Perform language and framework specific security best-practice reviews and suggest improvements.",
+    "host_name": "tessl.io",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

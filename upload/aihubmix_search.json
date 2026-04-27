@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://skills.aihubmix.com/en",
+    "name": "Discover AI Agent Skills",
+    "snippet": "Design1 skills · DevOps3 skills · Testing & Security0 skills · Documentation6 skills · Tools & Utilities7 skills. All Skills. /. Showing ...",
+    "host_name": "skills.aihubmix.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://skills.aihubmix.com/ko/categories",
+    "name": "카테고리",
+    "snippet": "카테고리 ; 개발. development. 6 ; 디자인. design. 1 ; DevOps. devops. 3 ; 테스트 및 보안. testing. 0 ; 문서화. documentation. 6.",
+    "host_name": "skills.aihubmix.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/sanjay3290/ai-skills",
+    "name": "sanjay3290/ai-skills: Collection of agent skills for AI coding",
+    "snippet": "One command to install skills into any AI coding agent. Install Skills. # Browse all 20 available skills npx skills add sanjay3290/ai-skills --list # Install ...",
+    "host_name": "github.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://skills.aihubmix.com/en/s/doc",
+    "name": "DOCX Skill",
+    "snippet": "Read or review DOCX content where layout matters (tables, diagrams, pagination). Create or edit DOCX files with professional formatting. Validate visual layout ...",
+    "host_name": "skills.aihubmix.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://skills.aihubmix.com/de/s/openai-docs",
+    "name": "OpenAI Docs | Skills Registry",
+    "snippet": "Provide authoritative, current guidance from OpenAI developer docs using the developers.openai.com MCP server. Always prioritize the developer docs MCP tools ...",
+    "host_name": "skills.aihubmix.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://skills.aihubmix.com/zh-CN/s/doc",
+    "name": "DOCX Skill",
+    "snippet": "Read or review DOCX content where layout matters (tables, diagrams, pagination). Create or edit DOCX files with professional formatting. Validate visual layout ...",
+    "host_name": "skills.aihubmix.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://docs.workforce.pearson.com/reference/ai_skills_list_di_v1_skills_ai_skills_get",
+    "name": "AI Skills List - Compensation by Occupation - Pearson",
+    "snippet": "Returns the complete list of AI skills in Pearson ontology , grouped by AI skill types. ap-southeast-2 ca-central-1 eu-central-1 eu-west-2 ap-southeast-1 ...",
+    "host_name": "docs.workforce.pearson.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://skillsllm.com",
+    "name": "AI Skills Marketplace: SkillsLLM",
+    "snippet": "Discover and explore open-source AI agent skills for Claude Code, Codex CLI, and ChatGPT. Browse 1600+ security-vetted skills across MCP servers, AI agents, ...",
+    "host_name": "skillsllm.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://aihubmix.com",
+    "name": "AIHubMix",
+    "snippet": "Access every major LLM through a single, unified interface. Connect to ChatGPT, Claude, Gemini, DeepSeek, Doubao, Qwen and more with unlimited concurrency.",
+    "host_name": "aihubmix.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=I4qiFat2puU",
+    "name": "9 AI Skills You MUST Have to Get Ahead of 99% of People",
+    "snippet": "9 AI Skills You MUST Have to Get Ahead of 99% of People. 105 views ... The 8 AI Skills That Will Separate Winners From Losers in 2026.",
+    "host_name": "www.youtube.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

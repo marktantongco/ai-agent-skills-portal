@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/inferera/skills-repo",
+    "name": "AIhubmix/skills-repo: One registry, every agent. Browse and  - GitHub",
+    "snippet": "An open, community-maintained skill registry for AI coding agents. Browse, install, and share reusable skills across Claude Code, Cursor, Codex, OpenCode, and ... Missing: list | Show results with: list",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://skills.aihubmix.com/en",
+    "name": "Discover AI Agent Skills",
+    "snippet": "Discover AI Agent Skills. A community-maintained registry of skills for AI agents. Submit from GitHub and keep everything reviewable via PRs. Missing: list | Show results with: list",
+    "host_name": "skills.aihubmix.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/sanjay3290/ai-skills",
+    "name": "sanjay3290/ai-skills: Collection of agent skills for AI coding assistants",
+    "snippet": "A collection of portable skills for AI coding assistants. Works with all major AI clients that support the Agent Skills Standard. Supported AI Clients. Claude ...",
+    "host_name": "github.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/openai/skills",
+    "name": "openai/skills: Skills Catalog for Codex - GitHub",
+    "snippet": "Agent Skills are folders of instructions, scripts, and resources that AI agents can discover and use to perform at specific tasks.",
+    "host_name": "github.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/gabrielkoerich/skills",
+    "name": "A collection of independent, self-contained skills for AI agents. · GitHub",
+    "snippet": "A collection of independent, self-contained skills for AI agents. Each skill lives in its own directory with a SKILL.md documentation file.",
+    "host_name": "github.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.facebook.com/minhtung09/posts/th%C6%B0-vi%E1%BB%87n-t%E1%BB%95ng-h%E1%BB%A3p-t%E1%BA%A5t-c%E1%BA%A3-skills-cho-ai-agentsc%C3%A0i-%C4%91%E1%BA%B7t-%C4%91%C6%A1n-gi%E1%BA%A3n-v%E1%BB%9Bi-1-l%E1%BB%87nhnpx-skil/33559690823646482",
+    "name": "Thư viện tổng hợp tất cả Skills cho AI Agents Cài đặt đơn giản với 1",
+    "snippet": "Thư viện tổng hợp tất cả Skills cho AI Agents Cài đặt đơn giản với 1 lệnh: npx skills add https://skills.sh/ Missing: github registry list",
+    "host_name": "www.facebook.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/alirezarezvani/claude-skills",
+    "name": "alirezarezvani/claude-skills: 232+ Claude Code skills & agent",
+    "snippet": "The most comprehensive open-source library of Claude Code skills and agent plugins — also works with OpenAI Codex, Gemini CLI, Cursor, and 7 more coding agents.",
+    "host_name": "github.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://ai-sdk.dev/providers/ai-sdk-providers/anthropic",
+    "name": "Anthropic Provider - AI SDK",
+    "snippet": "Anthropic Agent Skills enable Claude to perform specialized tasks like document processing (PPTX, DOCX, PDF, XLSX) and data analysis. Skills run in a sandboxed ...",
+    "host_name": "ai-sdk.dev",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://cran.r-project.org/web/packages/aisdk/readme/README.html",
+    "name": "aisdk: The AI SDK for R - README",
+    "snippet": "# Initialize the registry and tools registry <- create_skill_registry(system.file(\"skills\", package = \"aisdk\")) skill_tools <- create_skill_tools(registry) ...",
+    "host_name": "cran.r-project.org",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/hoodini/ai-agents-skills",
+    "name": "GitHub - hoodini/ai-agents-skills: AI Agent Skills Repository - GitHub",
+    "snippet": "AI Agent Skills Repository - A curated collection of specialized skills for AI coding agents (Claude Code, GitHub Copilot, Cursor, Windsurf).",
+    "host_name": "github.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

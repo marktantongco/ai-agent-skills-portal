@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/inferera/skills-repo",
+    "name": "AIhubmix/skills-repo: One registry, every agent. Browse",
+    "snippet": "An open, community-maintained skill registry for AI coding agents. Browse, install, and share reusable skills across Claude Code, Cursor, Codex, OpenCode, and ...",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/inference-sh/skills",
+    "name": "inference-sh/skills",
+    "snippet": "inference.sh Agent skills for using our API to give your agents access to hundreds of apps and other agents - inference-sh/skills.",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/AIhubmix/skills",
+    "name": "AIhubmix/skills: skills factory",
+    "snippet": "统一管理项目内可复用的 skills ; 把主 Skill 、参考资料、模板、脚本拆分清楚; 让单个 skill 可以独立维护，也能在多项目间迁移; 为后续新增多个 skills 提供一致的命名和 ...",
+    "host_name": "github.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/Orchestra-Research/AI-research-SKILLs",
+    "name": "AI Research Skills Library",
+    "snippet": "We provide a comprehensive skills library that enables AI agents to autonomously conduct the full research lifecycle — from brainstorming ideas to writing the ...",
+    "host_name": "github.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/AIhubmix/skills-repo",
+    "name": "GitHub - AIhubmix/skills-repo: One registry, every agent",
+    "snippet": "An open, community-maintained skill registry for AI coding agents. Browse, install, and share reusable skills across Claude Code, Cursor, Codex, OpenCode, and Antigravity.",
+    "host_name": "github.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://skills.aihubmix.com/en",
+    "name": "Skills Registry | Skills Registry - skills.aihubmix.com",
+    "snippet": "Discover AI Agent Skills A community-maintained registry of skills for AI agents. Submit from GitHub and keep everything reviewable via PRs.",
+    "host_name": "skills.aihubmix.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/inferera/skills-repo/tree/main/skills",
+    "name": "skills-repo/skills at main · inferera/skills-repo · GitHub",
+    "snippet": "Browse and share skills across Claude Code, Cursor, Codex, and more. - skills-repo/skills at main · inferera/skills-repo.",
+    "host_name": "github.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/AiHubMix",
+    "name": "AIhubmix - GitHub",
+    "snippet": "Browse and share skills across Claude Code, Cursor, Codex, and more. Autonomous coding agent right in your IDE, capable of creating/editing files, executing commands, using the browser, and more with your permission every step of the way.",
+    "host_name": "github.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.analyticsvidhya.com/blog/2026/03/github-repositories-to-get-free-claude-code-skills",
+    "name": "Top 5 GitHub Repositories for Free Claude Skills (1000+ Skills)",
+    "snippet": "The smarter move is to use production-ready Claude Code skills that developers are already sharing on GitHub. This list covers the best repositories where you can find 1000+ free Claude-compatible skills, from automation workflows to agent systems.",
+    "host_name": "www.analyticsvidhya.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.openaitoolshub.org/en/blog/best-claude-code-skills-2026",
+    "name": "Best Claude Code Skills in 2026: 349 Agent Skills Ranked by",
+    "snippet": "We catalogued 349 Claude Code skills across 12 categories. Here are the most useful ones for development, DevOps, data analysis, and design — ranked by real GitHub adoption.",
+    "host_name": "www.openaitoolshub.org",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]
