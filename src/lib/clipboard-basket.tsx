@@ -34,17 +34,20 @@ const STORAGE_KEY = 'clipboard-basket-items'
 // PROVIDER
 // ──────────────────────────────────────────────────────────
 export function ClipboardBasketProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<ClipboardItem[]>(() => {
-    if (typeof window === 'undefined') return []
+  const [items, setItems] = useState<ClipboardItem[]>([])
+  const [isOpen, setIsOpen] = useState(false)
+
+  // Load from localStorage after mount to avoid hydration mismatch
+  useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
-      if (!raw) return []
-      return JSON.parse(raw)
+      if (raw) {
+        setItems(JSON.parse(raw))
+      }
     } catch {
-      return []
+      // storage unavailable
     }
-  })
-  const [isOpen, setIsOpen] = useState(false)
+  }, [])
 
   // Save to localStorage on change
   useEffect(() => {
@@ -196,14 +199,8 @@ export function ClipboardBasketFloating() {
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="fixed inset-x-0 bottom-0 z-50 lg:initial-none max-h-[80vh] rounded-t-2xl bg-background border-t border-border shadow-2xl flex flex-col
+              className="fixed inset-x-0 bottom-0 z-50 max-h-[80vh] rounded-t-2xl bg-background border-t border-border shadow-2xl flex flex-col
                 lg:fixed lg:inset-x-auto lg:right-6 lg:bottom-24 lg:w-96 lg:max-h-[70vh] lg:rounded-2xl lg:border"
-              style={typeof window !== 'undefined' && window.innerWidth >= 1024 ? {
-                right: '1.5rem',
-                bottom: '6rem',
-                left: 'auto',
-                width: '24rem',
-              } : {}}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-border shrink-0">

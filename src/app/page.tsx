@@ -68,8 +68,8 @@ const SECTIONS = [
 // ANIMATION VARIANTS
 // ──────────────────────────────────────────────────────────
 const sectionVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
 }
 
 const cardHover = {
@@ -210,12 +210,19 @@ function Section({ id, children, className }: { id: string; children: React.Reac
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    // Check if already in viewport on mount
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setVisible(true)
+    }
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
     )
     observer.observe(el)
-    return () => observer.disconnect()
+    // Fallback: ensure visible after 2s even if observer fails
+    const fallback = setTimeout(() => setVisible(true), 2000)
+    return () => { observer.disconnect(); clearTimeout(fallback) }
   }, [])
 
   return (
@@ -652,20 +659,21 @@ export default function SkillsPortal() {
                   {INTENT_DOMAINS.map((d) => {
                     const colors = INTENT_COLORS[d.color] || { bg: 'bg-slate-500/15', text: 'text-slate-400', border: 'border-slate-500/30' }
                     return (
-                      <button
+                      <div
                         key={d.name}
                         onClick={() => setRouterQuery(d.keywords[0])}
-                        className={`rounded-lg border ${colors.border} ${colors.bg} p-3 text-left hover:scale-[1.02] transition-transform`}
+                        className={`rounded-lg border ${colors.border} ${colors.bg} p-3 text-left hover:scale-[1.02] transition-transform cursor-pointer`}
                         role="listitem"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setRouterQuery(d.keywords[0]) } }}
                         aria-label={`Route to ${d.name}: ${d.trigger}`}
                       >
                         <span className="text-lg" aria-hidden="true">{d.icon}</span>
                         <div className={`text-sm font-medium ${colors.text}`}>{d.name}</div>
                         <div className="flex items-center gap-1">
                           <code className="text-[10px] text-muted-foreground">{d.trigger}</code>
-                          <CopyBtn text={d.trigger} label={`Copy ${d.name} trigger`} />
                         </div>
-                      </button>
+                      </div>
                     )
                   })}
                 </div>
