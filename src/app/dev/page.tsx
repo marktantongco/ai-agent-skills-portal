@@ -23,6 +23,7 @@ import {
   getCatColor, getHealthBadge, STATUS_COLORS, INTENT_COLORS
 } from '@/lib/skills-data'
 import type { Skill, SkillCombo, Playbook, IntentDomain, FAQItem } from '@/lib/skills-data'
+import { ClipboardBasketProvider, useClipboardBasketSafe, ClipboardBasketFloating } from '@/lib/clipboard-basket'
 
 // ──────────────────────────────────────────────────────────
 // SECTION LABELS & ZONE COLORS
@@ -70,11 +71,13 @@ const staggerItem = {
 // ──────────────────────────────────────────────────────────
 function CopyBtn({ text, className = '' }: { text: string; className?: string }) {
   const [copied, setCopied] = useState(false)
+  const { addItem: addItemToBasket } = useClipboardBasketSafe()
   const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(text)
     setCopied(true)
+    if (addItemToBasket) addItemToBasket(text)
     setTimeout(() => setCopied(false), 1500)
-  }, [text])
+  }, [text, addItemToBasket])
   return (
     <motion.button
       onClick={handleCopy}
@@ -504,6 +507,7 @@ export default function DevPortalPage() {
   // RENDER
   // ────────────────────────────────────────────────────────
   return (
+    <ClipboardBasketProvider>
     <div className="min-h-screen bg-[#0B0D10] text-white flex">
       {/* ─── SCROLL PROGRESS BAR ─── */}
       <div className="fixed top-0 left-0 right-0 z-[60] h-[2px]">
@@ -769,7 +773,7 @@ export default function DevPortalPage() {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true, margin: '-40px' }}
-              className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3"
+              className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3"
             >
               {PLAYBOOKS.map(pb => (
                 <motion.div key={pb.name} variants={staggerItem}>
@@ -879,7 +883,6 @@ export default function DevPortalPage() {
                     {comboConflicts.map((c, i) => (
                       <div key={i} className="font-mono text-[9px] text-[#A1A1AA]">
                         <span className="text-[#ff3b30]">{c.skillA}</span> ↔ <span className="text-[#ff3b30]">{c.skillB}</span>: {c.reason}
-                        <CopyBtn text={`${c.skillA} ↔ ${c.skillB}: ${c.reason}`} />
                       </div>
                     ))}
                   </div>
@@ -890,7 +893,6 @@ export default function DevPortalPage() {
                     {comboSynergies.map((c, i) => (
                       <div key={i} className="font-mono text-[9px] text-[#A1A1AA]">
                         <span className="text-[#22c55e]">{c.skillA}</span> + <span className="text-[#22c55e]">{c.skillB}</span>: {c.reason}
-                        <CopyBtn text={`${c.skillA} + ${c.skillB}: ${c.reason}`} />
                       </div>
                     ))}
                   </div>
@@ -1126,7 +1128,7 @@ export default function DevPortalPage() {
                   {ROI_DATA.map(row => (
                     <TableRow key={row.stack} className="border-[rgba(255,255,255,0.05)] hover:bg-[rgba(167,139,250,0.03)]">
                       <TableCell className="font-mono text-xs text-white">
-                        <div className="flex items-center gap-1">{row.stack} <CopyBtn text={row.stack} /></div>
+                        {row.stack}
                       </TableCell>
                       <TableCell className="font-mono text-xs text-[#6B7280]">{row.timeWithout}</TableCell>
                       <TableCell className="font-mono text-xs text-[#22c55e]">{row.timeWith}</TableCell>
@@ -1179,7 +1181,6 @@ export default function DevPortalPage() {
                         ))}
                         <div className="mt-2 pt-2 border-t border-[rgba(255,255,255,0.07)] font-mono text-[9px] text-[#A1A1AA]">
                           routing: <span className="text-[#a78bfa]">{overlap.routing}</span>
-                          <CopyBtn text={overlap.routing} />
                         </div>
                       </div>
                     </AccordionContent>
@@ -1249,7 +1250,7 @@ export default function DevPortalPage() {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true, margin: '-40px' }}
-              className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3"
+              className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3"
             >
               {ERROR_STANDARDS.map(es => (
                 <motion.div key={es.skill} variants={staggerItem}>
@@ -1327,7 +1328,7 @@ export default function DevPortalPage() {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true, margin: '-40px' }}
-              className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3"
+              className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3"
             >
               {DEPENDENCIES.map((dep, i) => (
                 <motion.div key={i} variants={staggerItem}>
@@ -1379,14 +1380,12 @@ export default function DevPortalPage() {
                       <div className="font-mono text-[9px] tracking-wider uppercase text-[#ff3b30] mb-0.5">detect</div>
                       <div className="font-mono text-[10px] text-[#A1A1AA] flex items-center gap-1">
                         {rule.detect}
-                        <CopyBtn text={rule.detect} />
                       </div>
                     </div>
                     <div>
                       <div className="font-mono text-[9px] tracking-wider uppercase text-[#22c55e] mb-0.5">repair</div>
                       <div className="font-mono text-[10px] text-[#A1A1AA] flex items-center gap-1">
                         {rule.repair}
-                        <CopyBtn text={rule.repair} />
                       </div>
                     </div>
                   </div>
@@ -1537,6 +1536,8 @@ export default function DevPortalPage() {
 
         </div>
       </main>
+      <ClipboardBasketFloating />
     </div>
+    </ClipboardBasketProvider>
   )
 }

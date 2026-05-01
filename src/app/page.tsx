@@ -40,6 +40,7 @@ import {
   getCatColor, getHealthBadge, STATUS_COLORS, INTENT_COLORS
 } from '@/lib/skills-data'
 import type { Skill, SkillCombo, Playbook, IntentDomain, FAQItem } from '@/lib/skills-data'
+import { ClipboardBasketProvider, useClipboardBasketSafe, ClipboardBasketFloating } from '@/lib/clipboard-basket'
 
 // ──────────────────────────────────────────────────────────
 // SECTION CONFIG — Directory is LAST (section 16)
@@ -158,13 +159,15 @@ function AnimatedCounter({ value, duration = 1.2 }: { value: number; duration?: 
 function CopyBtn({ text, label }: { text: string; label?: string }) {
   const [copied, setCopied] = useState(false)
   const [rippling, setRippling] = useState(false)
+  const { addItem: addItemToBasket } = useClipboardBasketSafe()
   const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(text)
     setCopied(true)
     setRippling(true)
+    if (addItemToBasket) addItemToBasket(text, label)
     setTimeout(() => setCopied(false), 1500)
     setTimeout(() => setRippling(false), 400)
-  }, [text])
+  }, [text, label, addItemToBasket])
   return (
     <Button
       variant="ghost"
@@ -415,6 +418,7 @@ export default function SkillsPortal() {
   ], [])
 
   return (
+    <ClipboardBasketProvider>
     <TooltipProvider delayDuration={200}>
       <div className="min-h-screen bg-background text-foreground flex flex-col">
 
@@ -539,7 +543,7 @@ export default function SkillsPortal() {
         </AnimatePresence>
 
         {/* ── MAIN CONTENT ── */}
-        <main className="pt-[58px] pb-16 pl-12 pr-4 md:px-16 lg:px-24 max-w-7xl mx-auto flex-1" role="main">
+        <main className="pt-[58px] pb-16 px-4 md:px-16 lg:pl-24 lg:pr-16 max-w-7xl mx-auto flex-1" role="main">
 
           {/* ═══════════════════ 1. HERO ═══════════════════ */}
           <Section id="hero" className="py-16 md:py-24">
@@ -548,10 +552,10 @@ export default function SkillsPortal() {
                 <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                 <span itemProp="numberOfItems">{INSTALLED_SKILLS.length}</span> Skills · <span>{SKILL_COMBOS.length}</span> Stacks · <span>{PLAYBOOKS.length}</span> Playbooks
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent leading-tight" itemProp="name">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent leading-tight" itemProp="name">
                 AI Agent Skills Portal
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto" itemProp="description">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto" itemProp="description">
                 The definitive directory of AI agent skills with optimized stacks, playbooks, and one-prompt install commands.
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-3xl mx-auto pt-6">
@@ -570,7 +574,6 @@ export default function SkillsPortal() {
                           <AnimatedCounter value={value} />
                         </div>
                         <div className="text-xs text-muted-foreground">{label}</div>
-                        <CopyBtn text={`${label}: ${value}`} label={`Copy ${label} stat`} />
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -586,7 +589,7 @@ export default function SkillsPortal() {
             <div ref={setRef('router')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Cpu className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Skill Router</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Skill Router</h2>
               </div>
               <p className="text-muted-foreground mb-6 text-sm">Describe what you want to do — the router maps your intent to the optimal stack.</p>
               <div className="max-w-2xl mx-auto space-y-4">
@@ -677,7 +680,7 @@ export default function SkillsPortal() {
             <div ref={setRef('playbooks')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Play className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Playbooks</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Playbooks</h2>
                 <Badge variant="secondary" className="text-xs">{PLAYBOOKS.length} playbooks</Badge>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -730,7 +733,7 @@ export default function SkillsPortal() {
             <div ref={setRef('combos')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Wand2 className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Combo Generator</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Combo Generator</h2>
               </div>
               <div className="max-w-3xl mx-auto space-y-4">
                 <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
@@ -816,7 +819,6 @@ export default function SkillsPortal() {
                                     </div>
                                     <span className="text-xs font-medium flex-1">{s}</span>
                                     {skill && <Badge variant="outline" className={`text-[10px] h-5 ${catColor.text} ${catColor.border}`}>{skill.category}</Badge>}
-                                    <CopyBtn text={s} label={`Copy skill name: ${s}`} />
                                     <Button variant="ghost" size="icon" className="h-5 w-5" onClick={() => removeComboSkill(s)} aria-label={`Remove ${s} from combo`}>
                                       <X className="h-3 w-3" />
                                     </Button>
@@ -850,7 +852,6 @@ export default function SkillsPortal() {
                               <div className="flex-1">
                                 <span className="font-medium text-red-400">Conflict:</span> {c.skillA} ↔ {c.skillB} — {c.reason}
                               </div>
-                              <CopyBtn text={`⚠️ Conflict: ${c.skillA} ↔ ${c.skillB} — ${c.reason}`} label="Copy conflict info" />
                             </motion.div>
                           ))}
                           {comboSynergies.map((c, i) => (
@@ -864,7 +865,6 @@ export default function SkillsPortal() {
                               <div className="flex-1">
                                 <span className="font-medium text-emerald-400">Synergy:</span> {c.skillA} + {c.skillB} — {c.reason}
                               </div>
-                              <CopyBtn text={`✓ Synergy: ${c.skillA} + ${c.skillB} — ${c.reason}`} label="Copy synergy info" />
                             </motion.div>
                           ))}
                         </motion.div>
@@ -940,7 +940,7 @@ export default function SkillsPortal() {
             <div ref={setRef('stacks')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Layers className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Skill Stacks</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Skill Stacks</h2>
                 <Badge variant="secondary" className="text-xs">{SKILL_COMBOS.length} stacks</Badge>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -1029,7 +1029,7 @@ export default function SkillsPortal() {
             <div ref={setRef('top-skills')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Trophy className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Top Skills by Installs</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Top Skills by Installs</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
@@ -1079,7 +1079,7 @@ export default function SkillsPortal() {
             <div ref={setRef('compatibility')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Shield className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Compatibility Matrix</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Compatibility Matrix</h2>
               </div>
               <Tabs defaultValue="synergies">
                 <TabsList className="mb-4">
@@ -1099,7 +1099,7 @@ export default function SkillsPortal() {
                           <div className="text-xs font-medium">{c.skillA} + {c.skillB}</div>
                           <div className="text-[10px] text-muted-foreground">{c.reason}</div>
                         </div>
-                        <CopyBtn text={`${c.skillA} + ${c.skillB}: ${c.reason}`} label={`Copy synergy: ${c.skillA} + ${c.skillB}`} />
+                        <CopyBtn text={`${c.skillA} + ${c.skillB}`} label={`Copy synergy: ${c.skillA} + ${c.skillB}`} />
                       </div>
                     ))}
                   </div>
@@ -1113,7 +1113,7 @@ export default function SkillsPortal() {
                           <div className="text-xs font-medium">{c.skillA} ↔ {c.skillB}</div>
                           <div className="text-[10px] text-muted-foreground">{c.reason}</div>
                         </div>
-                        <CopyBtn text={`⚠️ ${c.skillA} ↔ ${c.skillB}: ${c.reason}`} label={`Copy conflict: ${c.skillA} ↔ ${c.skillB}`} />
+                        <CopyBtn text={`${c.skillA} ↔ ${c.skillB}`} label={`Copy conflict: ${c.skillA} ↔ ${c.skillB}`} />
                       </div>
                     ))}
                   </div>
@@ -1129,7 +1129,7 @@ export default function SkillsPortal() {
             <div ref={setRef('roi')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <BarChart3 className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Stack ROI</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Stack ROI</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
@@ -1143,7 +1143,6 @@ export default function SkillsPortal() {
                           <TableHead className="text-xs">Quality w/o</TableHead>
                           <TableHead className="text-xs">Quality w/</TableHead>
                           <TableHead className="text-xs">Error ↓</TableHead>
-                          <TableHead className="w-10" />
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1155,9 +1154,6 @@ export default function SkillsPortal() {
                             <TableCell className="text-xs text-red-400">{r.qualityWithout}</TableCell>
                             <TableCell className="text-xs text-emerald-400">{r.qualityWith}</TableCell>
                             <TableCell className="text-xs text-amber-400 font-medium">{r.errorReduction}</TableCell>
-                            <TableCell>
-                              <CopyBtn text={`ROI: ${r.stack} — Time: ${r.timeWithout}→${r.timeWith}, Quality: ${r.qualityWithout}→${r.qualityWith}, Error↓${r.errorReduction}`} label={`Copy ROI for ${r.stack}`} />
-                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -1175,7 +1171,7 @@ export default function SkillsPortal() {
             <div ref={setRef('comparative')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <ArrowRightLeft className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Comparative Analysis</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Comparative Analysis</h2>
               </div>
               <Accordion type="multiple" className="space-y-2">
                 {SKILL_OVERLAPS.map((overlap) => (
@@ -1199,13 +1195,11 @@ export default function SkillsPortal() {
                               </div>
                               <div className="text-[10px] text-muted-foreground">Best for: {s.bestFor}</div>
                             </div>
-                            <CopyBtn text={`${s.name} (${s.approach}): ${s.bestFor}`} label={`Copy ${s.name} comparison`} />
                           </div>
                         )
                       })}
                       <div className="text-[10px] text-amber-400 font-medium flex items-center gap-1">
                         <ArrowRight className="h-3 w-3" aria-hidden="true" /> Routing: {overlap.routing}
-                        <CopyBtn text={`Routing: ${overlap.routing}`} label="Copy routing rule" />
                       </div>
                     </AccordionContent>
                   </AccordionItem>
@@ -1221,7 +1215,7 @@ export default function SkillsPortal() {
             <div ref={setRef('upgrades')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Zap className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Upgrade Paths</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Upgrade Paths</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
@@ -1234,7 +1228,6 @@ export default function SkillsPortal() {
                           <TableHead className="text-xs">Upgraded</TableHead>
                           <TableHead className="text-xs hidden sm:table-cell">New Capabilities</TableHead>
                           <TableHead className="text-xs">Status</TableHead>
-                          <TableHead className="w-10" />
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1248,9 +1241,6 @@ export default function SkillsPortal() {
                               <TableCell className="text-xs text-muted-foreground hidden sm:table-cell">{u.newCapabilities}</TableCell>
                               <TableCell>
                                 <Badge variant="outline" className={`text-[10px] h-5 ${sc.text} ${sc.border}`}>{u.status}</Badge>
-                              </TableCell>
-                              <TableCell>
-                                <CopyBtn text={`${u.original} → ${u.upgraded}: ${u.newCapabilities} [${u.status}]`} label={`Copy upgrade: ${u.original} → ${u.upgraded}`} />
                               </TableCell>
                             </TableRow>
                           )
@@ -1270,7 +1260,7 @@ export default function SkillsPortal() {
             <div ref={setRef('errors')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <AlertTriangle className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Typed Error Handling</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Typed Error Handling</h2>
               </div>
               <Accordion type="multiple" className="space-y-2">
                 {ERROR_STANDARDS.map((es) => (
@@ -1323,7 +1313,7 @@ export default function SkillsPortal() {
             <div ref={setRef('escalation')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <RefreshCw className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Error Escalation Chains</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Error Escalation Chains</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
@@ -1335,7 +1325,6 @@ export default function SkillsPortal() {
                           <TableHead className="text-xs w-8" />
                           <TableHead className="text-xs">Escalate To</TableHead>
                           <TableHead className="text-xs hidden sm:table-cell">Reason</TableHead>
-                          <TableHead className="w-10" />
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1345,9 +1334,6 @@ export default function SkillsPortal() {
                             <TableCell className="text-xs text-amber-400 text-center" aria-hidden="true">→</TableCell>
                             <TableCell className="text-xs font-medium text-emerald-400">{ec.escalateTo}</TableCell>
                             <TableCell className="text-xs text-muted-foreground hidden sm:table-cell">{ec.reason}</TableCell>
-                            <TableCell>
-                              <CopyBtn text={`${ec.trigger} → ${ec.escalateTo}: ${ec.reason}`} label={`Copy escalation: ${ec.trigger} → ${ec.escalateTo}`} />
-                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -1365,7 +1351,7 @@ export default function SkillsPortal() {
             <div ref={setRef('dependencies')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <GitBranch className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Dependencies</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Dependencies</h2>
               </div>
               <div className="space-y-3">
                 {DEPENDENCIES.map((dep) => {
@@ -1398,7 +1384,7 @@ export default function SkillsPortal() {
                               </div>
                               <p className="text-[10px] text-muted-foreground">{dep.reason}</p>
                             </div>
-                            <CopyBtn text={`${dep.skill} depends on: ${dep.depends.join(', ')} — ${dep.reason}`} label={`Copy dependencies for ${dep.skill}`} />
+                            <CopyBtn text={dep.skill} label={`Copy ${dep.skill} name`} />
                           </div>
                         </CardContent>
                       </Card>
@@ -1416,7 +1402,7 @@ export default function SkillsPortal() {
             <div ref={setRef('healing')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Wrench className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Self-Healing Rules</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Self-Healing Rules</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
@@ -1427,7 +1413,6 @@ export default function SkillsPortal() {
                           <TableHead className="text-xs">Detect</TableHead>
                           <TableHead className="text-xs">Repair</TableHead>
                           <TableHead className="text-xs w-20">Severity</TableHead>
-                          <TableHead className="w-10" />
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1443,9 +1428,6 @@ export default function SkillsPortal() {
                               <TableCell className="text-xs text-muted-foreground">{hr.repair}</TableCell>
                               <TableCell>
                                 <Badge variant="outline" className={`text-[10px] h-5 ${sevColors[hr.severity] || ''}`}>{hr.severity}</Badge>
-                              </TableCell>
-                              <TableCell>
-                                <CopyBtn text={`Detect: ${hr.detect} | Repair: ${hr.repair} | Severity: ${hr.severity}`} label={`Copy healing rule: ${hr.detect}`} />
                               </TableCell>
                             </TableRow>
                           )
@@ -1465,7 +1447,7 @@ export default function SkillsPortal() {
             <div ref={setRef('faq')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Info className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Frequently Asked Questions</h2>
               </div>
               <Accordion type="multiple" className="space-y-2" role="region" aria-label="Frequently Asked Questions">
                 {FAQ_DATA.map((faq, i) => (
@@ -1479,7 +1461,6 @@ export default function SkillsPortal() {
                     <AccordionContent className="pb-4">
                       <div className="flex items-start gap-2">
                         <p className="text-xs text-muted-foreground leading-relaxed flex-1">{faq.answer}</p>
-                        <CopyBtn text={`Q: ${faq.question}\nA: ${faq.answer}`} label="Copy Q&A" />
                       </div>
                     </AccordionContent>
                   </AccordionItem>
@@ -1495,7 +1476,7 @@ export default function SkillsPortal() {
             <div ref={setRef('directory')} className="space-y-6">
               <div className="flex items-center gap-3 mb-6">
                 <Package className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-2xl font-bold">Full Skill Directory</h2>
+                <h2 className="text-xl sm:text-2xl font-bold">Full Skill Directory</h2>
                 <Badge variant="secondary" className="text-xs">{INSTALLED_SKILLS.length} skills</Badge>
               </div>
               {/* Filters */}
@@ -1551,7 +1532,7 @@ export default function SkillsPortal() {
                                 <span className="text-[9px] text-muted-foreground">{skill.installs}</span>
                               </div>
                             </div>
-                            <CopyBtn text={`${skill.name} [${skill.category}] Health:${skill.healthScore} — ${skill.description}`} label={`Copy skill info for ${skill.name}`} />
+                            <CopyBtn text={skill.name} label={`Copy ${skill.name}`} />
                           </div>
                         </CardContent>
                       </Card>
@@ -1572,7 +1553,9 @@ export default function SkillsPortal() {
           <p>AI Agent Skills Portal — {INSTALLED_SKILLS.length} Skills · {SKILL_COMBOS.length} Stacks · {PLAYBOOKS.length} Playbooks</p>
         </footer>
       </div>
+      <ClipboardBasketFloating />
     </TooltipProvider>
+    </ClipboardBasketProvider>
   )
 }
 
