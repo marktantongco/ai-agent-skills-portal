@@ -618,3 +618,56 @@
     @apply bg-background text-foreground overflow-x-hidden;
   }
 }
+
+/* ============================================================
+   Mobile Responsive Utilities
+   ============================================================ */
+
+/* Ensure touch targets meet 44x44 minimum on mobile */
+@media (max-width: 640px) {
+  .touch-min {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  .safe-top {
+    padding-top: max(var(--space-0), env(safe-area-inset-top));
+  }
+  .safe-bottom {
+    padding-bottom: max(var(--space-0), env(safe-area-inset-bottom));
+  }
+  .safe-left {
+    padding-left: max(var(--space-0), env(safe-area-inset-left));
+  }
+  .safe-right {
+    padding-right: max(var(--space-0), env(safe-area-inset-right));
+  }
+}
+
+/* Table scroll indicator for mobile */
+.table-scroll-wrapper {
+  position: relative;
+}
+.table-scroll-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  background: linear-gradient(to right, transparent, var(--background));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+@media (max-width: 640px) {
+  .table-scroll-wrapper::after {
+    opacity: 1;
+  }
+}
+.table-scroll-wrapper.scrolled-end::after {
+  opacity: 0;
+}

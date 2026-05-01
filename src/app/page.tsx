@@ -172,7 +172,7 @@ function CopyBtn({ text, label }: { text: string; label?: string }) {
     <Button
       variant="ghost"
       size="icon"
-      className={`h-6 w-6 shrink-0 relative overflow-hidden ${rippling ? 'scale-95' : ''} transition-transform duration-150`}
+      className={`h-6 w-6 sm:h-6 sm:w-6 shrink-0 relative overflow-hidden ${rippling ? 'scale-95' : ''} transition-transform duration-150 touch-min`}
       onClick={handleCopy}
       title={label || 'Copy'}
       aria-label={label || 'Copy to clipboard'}
@@ -433,7 +433,7 @@ export default function SkillsPortal() {
         <ScrollProgressBar />
 
         {/* ── TOP BAR ── */}
-        <header className="fixed top-[2px] left-0 right-0 z-50 h-14 border-b border-border/50 bg-background/80 backdrop-blur-xl flex items-center px-4 gap-3" role="banner">
+        <header className="fixed top-[2px] left-0 right-0 z-50 h-14 border-b border-border/50 bg-background/80 backdrop-blur-xl flex items-center px-2 sm:px-4 gap-2 sm:gap-3 safe-top" role="banner">
           <div className="flex items-center gap-2 shrink-0">
             <Sparkles className="h-5 w-5 text-amber-400" aria-hidden="true" />
             <span className="font-bold text-sm hidden sm:inline">Skills Portal</span>
@@ -442,7 +442,7 @@ export default function SkillsPortal() {
             <div className="relative">
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
               <Input
-                placeholder="Search skills, stacks, playbooks..."
+                placeholder="Search..."
                 className="pl-8 h-8 text-xs bg-muted/50 border-border/50 min-w-0"
                 value={globalSearch}
                 onChange={(e) => setGlobalSearch(e.target.value)}
@@ -450,12 +450,12 @@ export default function SkillsPortal() {
               />
             </div>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
             {/* Mobile nav toggle */}
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 lg:hidden"
+              className="h-8 w-8 lg:hidden touch-min"
               onClick={() => setMobileNavOpen(!mobileNavOpen)}
               aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={mobileNavOpen}
@@ -471,7 +471,7 @@ export default function SkillsPortal() {
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8"
+              className="h-8 w-8 touch-min"
               onClick={() => setDark(!dark)}
               aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
@@ -518,7 +518,7 @@ export default function SkillsPortal() {
                 aria-hidden="true"
               />
               <motion.aside
-                className="fixed left-0 top-0 bottom-0 z-50 w-56 bg-background border-r border-border/50 p-4 pt-20 overflow-y-auto lg:hidden"
+                className="fixed left-0 top-0 bottom-0 z-50 w-64 sm:w-56 bg-background border-r border-border/50 p-4 pt-16 sm:pt-20 overflow-y-auto lg:hidden safe-bottom"
                 initial={{ x: -224 }}
                 animate={{ x: 0 }}
                 exit={{ x: -224 }}
@@ -526,12 +526,12 @@ export default function SkillsPortal() {
                 role="navigation"
                 aria-label="Mobile section navigation"
               >
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-0.5">
                   {SECTIONS.map(({ id, label, icon: Icon }) => (
                     <button
                       key={id}
                       onClick={() => scrollTo(id)}
-                      className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
+                      className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm transition-colors touch-min ${
                         activeSection === id
                           ? 'bg-amber-500/15 text-amber-400 font-medium'
                           : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
@@ -553,19 +553,19 @@ export default function SkillsPortal() {
         <main className="pt-[58px] pb-16 px-4 md:px-16 lg:pl-24 lg:pr-16 w-full max-w-7xl mx-auto flex-1" role="main">
 
           {/* ═══════════════════ 1. HERO ═══════════════════ */}
-          <Section id="hero" className="py-16 md:py-24">
-            <div ref={setRef('hero')} className="text-center space-y-6" itemScope itemType="https://schema.org/WebApplication">
-              <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 text-xs text-amber-400 font-medium" role="status">
-                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+          <Section id="hero" className="py-10 sm:py-16 md:py-24">
+            <div ref={setRef('hero')} className="text-center space-y-4 sm:space-y-6" itemScope itemType="https://schema.org/WebApplication">
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 sm:px-4 py-1.5 text-[10px] sm:text-xs text-amber-400 font-medium" role="status">
+                <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" aria-hidden="true" />
                 <span itemProp="numberOfItems">{INSTALLED_SKILLS.length}</span> Skills · <span>{SKILL_COMBOS.length}</span> Stacks · <span>{PLAYBOOKS.length}</span> Playbooks
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent leading-tight" itemProp="name">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent leading-tight px-2" itemProp="name">
                 AI Agent Skills Portal
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto" itemProp="description">
+              <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-2xl mx-auto px-2" itemProp="description">
                 The definitive directory of AI agent skills with optimized stacks, playbooks, and one-prompt install commands.
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-3xl mx-auto pt-6">
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 max-w-3xl mx-auto pt-4 sm:pt-6">
                 {stats.map(({ label, value, icon: Icon }) => (
                   <motion.div
                     key={label}
@@ -575,12 +575,12 @@ export default function SkillsPortal() {
                     transition={{ duration: 0.2 }}
                   >
                     <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
-                      <CardContent className="p-4 text-center space-y-1">
-                        <Icon className="h-5 w-5 mx-auto text-amber-400" aria-hidden="true" />
-                        <div className="text-2xl font-bold" aria-label={`${label}: ${value}`}>
+                      <CardContent className="p-3 sm:p-4 text-center space-y-1">
+                        <Icon className="h-4 w-4 sm:h-5 sm:w-5 mx-auto text-amber-400" aria-hidden="true" />
+                        <div className="text-xl sm:text-2xl font-bold" aria-label={`${label}: ${value}`}>
                           <AnimatedCounter value={value} />
                         </div>
-                        <div className="text-xs text-muted-foreground">{label}</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground">{label}</div>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -589,28 +589,28 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 2. SKILL ROUTER ═══════════════════ */}
-          <Section id="router" className="py-12">
-            <div ref={setRef('router')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Cpu className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Skill Router</h2>
+          <Section id="router" className="py-8 sm:py-12">
+            <div ref={setRef('router')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Cpu className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Skill Router</h2>
               </div>
-              <p className="text-muted-foreground mb-6 text-sm">Describe what you want to do — the router maps your intent to the optimal stack.</p>
-              <div className="max-w-2xl mx-auto space-y-4">
+              <p className="text-muted-foreground mb-4 sm:mb-6 text-xs sm:text-sm">Describe what you want to do — the router maps your intent to the optimal stack.</p>
+              <div className="max-w-2xl mx-auto space-y-3 sm:space-y-4">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                   <Input
-                    placeholder="e.g. 'build a product', 'research AI agents', 'write SEO content'..."
-                    className="pl-10 h-12 text-base bg-muted/30 border-border/50"
+                    placeholder="e.g. 'build a product', 'research AI'..."
+                    className="pl-10 h-11 sm:h-12 text-sm sm:text-base bg-muted/30 border-border/50"
                     value={routerQuery}
                     onChange={(e) => setRouterQuery(e.target.value)}
                     aria-label="Describe your intent to route to a skill stack"
                   />
                   {routerQuery && (
-                    <button onClick={() => setRouterQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2" aria-label="Clear search">
+                    <button onClick={() => setRouterQuery('')} className="absolute right-2 top-1/2 -translate-y-1/2 p-2 touch-min" aria-label="Clear search">
                       <X className="h-4 w-4 text-muted-foreground" />
                     </button>
                   )}
@@ -655,23 +655,23 @@ export default function SkillsPortal() {
                 {!routerResult && routerQuery.trim() && (
                   <p className="text-sm text-muted-foreground text-center" role="status">No matching intent found. Try keywords like &quot;build&quot;, &quot;write&quot;, &quot;research&quot;, &quot;design&quot;, &quot;decide&quot;, &quot;data&quot;, &quot;learn&quot;, or &quot;automate&quot;.</p>
                 )}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2" role="list" aria-label="Intent domain shortcuts">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 sm:pt-2" role="list" aria-label="Intent domain shortcuts">
                   {INTENT_DOMAINS.map((d) => {
                     const colors = INTENT_COLORS[d.color] || { bg: 'bg-slate-500/15', text: 'text-slate-400', border: 'border-slate-500/30' }
                     return (
                       <div
                         key={d.name}
                         onClick={() => setRouterQuery(d.keywords[0])}
-                        className={`rounded-lg border ${colors.border} ${colors.bg} p-3 text-left hover:scale-[1.02] transition-transform cursor-pointer`}
+                        className={`rounded-lg border ${colors.border} ${colors.bg} p-2.5 sm:p-3 text-left hover:scale-[1.02] transition-transform cursor-pointer active:scale-[0.98]`}
                         role="listitem"
                         tabIndex={0}
                         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setRouterQuery(d.keywords[0]) } }}
                         aria-label={`Route to ${d.name}: ${d.trigger}`}
                       >
-                        <span className="text-lg" aria-hidden="true">{d.icon}</span>
-                        <div className={`text-sm font-medium ${colors.text}`}>{d.name}</div>
+                        <span className="text-base sm:text-lg" aria-hidden="true">{d.icon}</span>
+                        <div className={`text-xs sm:text-sm font-medium ${colors.text}`}>{d.name}</div>
                         <div className="flex items-center gap-1">
-                          <code className="text-[10px] text-muted-foreground">{d.trigger}</code>
+                          <code className="text-[9px] sm:text-[10px] text-muted-foreground">{d.trigger}</code>
                         </div>
                       </div>
                     )
@@ -681,17 +681,17 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 3. PLAYBOOKS ═══════════════════ */}
-          <Section id="playbooks" className="py-12">
-            <div ref={setRef('playbooks')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Play className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Playbooks</h2>
-                <Badge variant="secondary" className="text-xs">{PLAYBOOKS.length} playbooks</Badge>
+          <Section id="playbooks" className="py-8 sm:py-12">
+            <div ref={setRef('playbooks')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Play className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Playbooks</h2>
+                <Badge variant="secondary" className="text-[10px] sm:text-xs">{PLAYBOOKS.length} playbooks</Badge>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
                 {PLAYBOOKS.map((pb) => (
                   <motion.div
                     key={pb.name}
@@ -734,18 +734,18 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 4. COMBO GENERATOR ═══════════════════ */}
-          <Section id="combos" className="py-12">
-            <div ref={setRef('combos')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Wand2 className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Combo Generator</h2>
+          <Section id="combos" className="py-8 sm:py-12">
+            <div ref={setRef('combos')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Wand2 className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Combo Generator</h2>
               </div>
-              <div className="max-w-3xl mx-auto space-y-4">
+              <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4">
                 <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
-                  <CardContent className="p-4 space-y-4">
+                  <CardContent className="p-3 sm:p-4 space-y-3 sm:space-y-4">
                     {/* Name input */}
                     <Input
                       placeholder="Name your combo (optional)"
@@ -941,17 +941,17 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 5. STACKS ═══════════════════ */}
-          <Section id="stacks" className="py-12">
-            <div ref={setRef('stacks')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Layers className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Skill Stacks</h2>
-                <Badge variant="secondary" className="text-xs">{SKILL_COMBOS.length} stacks</Badge>
+          <Section id="stacks" className="py-8 sm:py-12">
+            <div ref={setRef('stacks')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Layers className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Skill Stacks</h2>
+                <Badge variant="secondary" className="text-[10px] sm:text-xs">{SKILL_COMBOS.length} stacks</Badge>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
                 {SKILL_COMBOS.map((combo) => {
                   const isExpanded = expandedStacks.has(combo.name)
                   return (
@@ -1030,18 +1030,21 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 6. TOP SKILLS BY INSTALLS ═══════════════════ */}
-          <Section id="top-skills" className="py-12">
-            <div ref={setRef('top-skills')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Trophy className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Top Skills by Installs</h2>
+          <Section id="top-skills" className="py-8 sm:py-12">
+            <div ref={setRef('top-skills')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Trophy className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Top Skills by Installs</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto table-scroll-wrapper" onScroll={(e) => {
+                    const target = e.currentTarget;
+                    target.classList.toggle('scrolled-end', target.scrollLeft + target.clientWidth >= target.scrollWidth - 1);
+                  }}>
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -1082,21 +1085,21 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 7. COMPATIBILITY ═══════════════════ */}
-          <Section id="compatibility" className="py-12">
-            <div ref={setRef('compatibility')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Shield className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Compatibility Matrix</h2>
+          <Section id="compatibility" className="py-8 sm:py-12">
+            <div ref={setRef('compatibility')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Compatibility Matrix</h2>
               </div>
               <Tabs defaultValue="synergies">
-                <TabsList className="mb-4">
-                  <TabsTrigger value="synergies" className="text-xs gap-1" aria-label="View synergies">
+                <TabsList className="mb-3 sm:mb-4">
+                  <TabsTrigger value="synergies" className="text-[10px] sm:text-xs gap-1" aria-label="View synergies">
                     <CheckCircle2 className="h-3 w-3 text-emerald-400" aria-hidden="true" /> Synergies ({COMPATIBILITY.filter(c => c.type === 'synergy').length})
                   </TabsTrigger>
-                  <TabsTrigger value="conflicts" className="text-xs gap-1" aria-label="View conflicts">
+                  <TabsTrigger value="conflicts" className="text-[10px] sm:text-xs gap-1" aria-label="View conflicts">
                     <AlertTriangle className="h-3 w-3 text-red-400" aria-hidden="true" /> Conflicts ({COMPATIBILITY.filter(c => c.type === 'conflict').length})
                   </TabsTrigger>
                 </TabsList>
@@ -1132,38 +1135,41 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 8. STACK ROI ═══════════════════ */}
-          <Section id="roi" className="py-12">
-            <div ref={setRef('roi')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <BarChart3 className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Stack ROI</h2>
+          <Section id="roi" className="py-8 sm:py-12">
+            <div ref={setRef('roi')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Stack ROI</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto table-scroll-wrapper" onScroll={(e) => {
+                    const target = e.currentTarget;
+                    target.classList.toggle('scrolled-end', target.scrollLeft + target.clientWidth >= target.scrollWidth - 1);
+                  }}>
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="text-xs">Stack</TableHead>
-                          <TableHead className="text-xs">Time w/o</TableHead>
-                          <TableHead className="text-xs">Time w/</TableHead>
-                          <TableHead className="text-xs">Quality w/o</TableHead>
-                          <TableHead className="text-xs">Quality w/</TableHead>
-                          <TableHead className="text-xs">Error ↓</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Stack</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Time w/o</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Time w/</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Quality w/o</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Quality w/</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Error ↓</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         {ROI_DATA.map((r) => (
                           <TableRow key={r.stack}>
-                            <TableCell className="text-xs font-medium">{r.stack}</TableCell>
-                            <TableCell className="text-xs text-red-400">{r.timeWithout}</TableCell>
-                            <TableCell className="text-xs text-emerald-400">{r.timeWith}</TableCell>
-                            <TableCell className="text-xs text-red-400">{r.qualityWithout}</TableCell>
-                            <TableCell className="text-xs text-emerald-400">{r.qualityWith}</TableCell>
-                            <TableCell className="text-xs text-amber-400 font-medium">{r.errorReduction}</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs font-medium whitespace-nowrap">{r.stack}</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs text-red-400 whitespace-nowrap">{r.timeWithout}</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs text-emerald-400 whitespace-nowrap">{r.timeWith}</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs text-red-400 whitespace-nowrap">{r.qualityWithout}</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs text-emerald-400 whitespace-nowrap">{r.qualityWith}</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs text-amber-400 font-medium whitespace-nowrap">{r.errorReduction}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -1174,14 +1180,14 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 9. COMPARATIVE ANALYSIS ═══════════════════ */}
-          <Section id="comparative" className="py-12">
-            <div ref={setRef('comparative')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <ArrowRightLeft className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Comparative Analysis</h2>
+          <Section id="comparative" className="py-8 sm:py-12">
+            <div ref={setRef('comparative')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <ArrowRightLeft className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Comparative Analysis</h2>
               </div>
               <Accordion type="multiple" className="space-y-2">
                 {SKILL_OVERLAPS.map((overlap) => (
@@ -1218,26 +1224,29 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 10. UPGRADE PATHS ═══════════════════ */}
-          <Section id="upgrades" className="py-12">
-            <div ref={setRef('upgrades')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Zap className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Upgrade Paths</h2>
+          <Section id="upgrades" className="py-8 sm:py-12">
+            <div ref={setRef('upgrades')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Upgrade Paths</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto table-scroll-wrapper" onScroll={(e) => {
+                    const target = e.currentTarget;
+                    target.classList.toggle('scrolled-end', target.scrollLeft + target.clientWidth >= target.scrollWidth - 1);
+                  }}>
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="text-xs">Original</TableHead>
-                          <TableHead className="text-xs w-8" />
-                          <TableHead className="text-xs">Upgraded</TableHead>
-                          <TableHead className="text-xs hidden sm:table-cell">New Capabilities</TableHead>
-                          <TableHead className="text-xs">Status</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Original</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs w-8 whitespace-nowrap" />
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Upgraded</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs hidden sm:table-cell whitespace-nowrap">New Capabilities</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Status</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1245,12 +1254,12 @@ export default function SkillsPortal() {
                           const sc = STATUS_COLORS[u.status] || { bg: '', text: '', border: '' }
                           return (
                             <TableRow key={u.original}>
-                              <TableCell className="text-xs">{u.original}</TableCell>
-                              <TableCell className="text-xs text-amber-400 text-center" aria-hidden="true">→</TableCell>
-                              <TableCell className="text-xs font-medium">{u.upgraded}</TableCell>
-                              <TableCell className="text-xs text-muted-foreground hidden sm:table-cell">{u.newCapabilities}</TableCell>
+                              <TableCell className="text-[10px] sm:text-xs whitespace-nowrap">{u.original}</TableCell>
+                              <TableCell className="text-[10px] sm:text-xs text-amber-400 text-center" aria-hidden="true">→</TableCell>
+                              <TableCell className="text-[10px] sm:text-xs font-medium whitespace-nowrap">{u.upgraded}</TableCell>
+                              <TableCell className="text-[10px] sm:text-xs text-muted-foreground hidden sm:table-cell">{u.newCapabilities}</TableCell>
                               <TableCell>
-                                <Badge variant="outline" className={`text-[10px] h-5 ${sc.text} ${sc.border}`}>{u.status}</Badge>
+                                <Badge variant="outline" className={`text-[9px] sm:text-[10px] h-5 ${sc.text} ${sc.border}`}>{u.status}</Badge>
                               </TableCell>
                             </TableRow>
                           )
@@ -1263,14 +1272,14 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 11. TYPED ERROR HANDLING ═══════════════════ */}
-          <Section id="errors" className="py-12">
-            <div ref={setRef('errors')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <AlertTriangle className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Typed Error Handling</h2>
+          <Section id="errors" className="py-8 sm:py-12">
+            <div ref={setRef('errors')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Error Handling</h2>
               </div>
               <Accordion type="multiple" className="space-y-2">
                 {ERROR_STANDARDS.map((es) => (
@@ -1316,34 +1325,37 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 12. ERROR ESCALATION ═══════════════════ */}
-          <Section id="escalation" className="py-12">
-            <div ref={setRef('escalation')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <RefreshCw className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Error Escalation Chains</h2>
+          <Section id="escalation" className="py-8 sm:py-12">
+            <div ref={setRef('escalation')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <RefreshCw className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Error Escalation</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto table-scroll-wrapper" onScroll={(e) => {
+                    const target = e.currentTarget;
+                    target.classList.toggle('scrolled-end', target.scrollLeft + target.clientWidth >= target.scrollWidth - 1);
+                  }}>
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="text-xs">Trigger</TableHead>
-                          <TableHead className="text-xs w-8" />
-                          <TableHead className="text-xs">Escalate To</TableHead>
-                          <TableHead className="text-xs hidden sm:table-cell">Reason</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Trigger</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs w-8 whitespace-nowrap" />
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Escalate To</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs hidden sm:table-cell whitespace-nowrap">Reason</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         {ESCALATION_CHAINS.map((ec, i) => (
                           <TableRow key={i}>
-                            <TableCell className="text-xs font-mono">{ec.trigger}</TableCell>
-                            <TableCell className="text-xs text-amber-400 text-center" aria-hidden="true">→</TableCell>
-                            <TableCell className="text-xs font-medium text-emerald-400">{ec.escalateTo}</TableCell>
-                            <TableCell className="text-xs text-muted-foreground hidden sm:table-cell">{ec.reason}</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs font-mono whitespace-nowrap">{ec.trigger}</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs text-amber-400 text-center" aria-hidden="true">→</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs font-medium text-emerald-400 whitespace-nowrap">{ec.escalateTo}</TableCell>
+                            <TableCell className="text-[10px] sm:text-xs text-muted-foreground hidden sm:table-cell">{ec.reason}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -1354,14 +1366,14 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 13. DEPENDENCIES ═══════════════════ */}
-          <Section id="dependencies" className="py-12">
-            <div ref={setRef('dependencies')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <GitBranch className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Dependencies</h2>
+          <Section id="dependencies" className="py-8 sm:py-12">
+            <div ref={setRef('dependencies')} className="space-y-3 sm:space-y-4">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <GitBranch className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Dependencies</h2>
               </div>
               <div className="space-y-3">
                 {DEPENDENCIES.map((dep) => {
@@ -1405,24 +1417,27 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 14. SELF-HEALING ═══════════════════ */}
-          <Section id="healing" className="py-12">
-            <div ref={setRef('healing')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Wrench className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Self-Healing Rules</h2>
+          <Section id="healing" className="py-8 sm:py-12">
+            <div ref={setRef('healing')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Wrench className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Self-Healing Rules</h2>
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto table-scroll-wrapper" onScroll={(e) => {
+                    const target = e.currentTarget;
+                    target.classList.toggle('scrolled-end', target.scrollLeft + target.clientWidth >= target.scrollWidth - 1);
+                  }}>
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="text-xs">Detect</TableHead>
-                          <TableHead className="text-xs">Repair</TableHead>
-                          <TableHead className="text-xs w-20">Severity</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Detect</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs whitespace-nowrap">Repair</TableHead>
+                          <TableHead className="text-[10px] sm:text-xs w-20 whitespace-nowrap">Severity</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1434,10 +1449,10 @@ export default function SkillsPortal() {
                           }
                           return (
                             <TableRow key={i}>
-                              <TableCell className="text-xs font-mono">{hr.detect}</TableCell>
-                              <TableCell className="text-xs text-muted-foreground">{hr.repair}</TableCell>
+                              <TableCell className="text-[10px] sm:text-xs font-mono whitespace-nowrap">{hr.detect}</TableCell>
+                              <TableCell className="text-[10px] sm:text-xs text-muted-foreground">{hr.repair}</TableCell>
                               <TableCell>
-                                <Badge variant="outline" className={`text-[10px] h-5 ${sevColors[hr.severity] || ''}`}>{hr.severity}</Badge>
+                                <Badge variant="outline" className={`text-[9px] sm:text-[10px] h-5 ${sevColors[hr.severity] || ''}`}>{hr.severity}</Badge>
                               </TableCell>
                             </TableRow>
                           )
@@ -1450,14 +1465,14 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 15. FAQ ═══════════════════ */}
-          <Section id="faq" className="py-12">
-            <div ref={setRef('faq')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Info className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Frequently Asked Questions</h2>
+          <Section id="faq" className="py-8 sm:py-12">
+            <div ref={setRef('faq')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Info className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">FAQ</h2>
               </div>
               <Accordion type="multiple" className="space-y-2" role="region" aria-label="Frequently Asked Questions">
                 {FAQ_DATA.map((faq, i) => (
@@ -1479,18 +1494,18 @@ export default function SkillsPortal() {
             </div>
           </Section>
 
-          <Separator className="my-4 bg-border/30" />
+          <Separator className="my-3 sm:my-4 bg-border/30" />
 
           {/* ═══════════════════ 16. FULL SKILL DIRECTORY (LAST SECTION) ═══════════════════ */}
-          <Section id="directory" className="py-12">
-            <div ref={setRef('directory')} className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Package className="h-6 w-6 text-amber-400" aria-hidden="true" />
-                <h2 className="text-xl sm:text-2xl font-bold">Full Skill Directory</h2>
-                <Badge variant="secondary" className="text-xs">{INSTALLED_SKILLS.length} skills</Badge>
+          <Section id="directory" className="py-8 sm:py-12">
+            <div ref={setRef('directory')} className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Package className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" aria-hidden="true" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold">Full Skill Directory</h2>
+                <Badge variant="secondary" className="text-[10px] sm:text-xs">{INSTALLED_SKILLS.length} skills</Badge>
               </div>
               {/* Filters */}
-              <div className="flex flex-col sm:flex-row gap-3 mb-4">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-3 sm:mb-4">
                 <div className="relative flex-1">
                   <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
                   <Input
@@ -1514,7 +1529,7 @@ export default function SkillsPortal() {
                 </Select>
               </div>
               {/* Skills grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-h-[800px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'thin', scrollbarColor: 'oklch(0.4 0 0) transparent' }} role="list" aria-label="Skill directory">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-h-[60vh] sm:max-h-[800px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'thin', scrollbarColor: 'oklch(0.4 0 0) transparent' }} role="list" aria-label="Skill directory">
                 {filteredSkills.map((skill) => {
                   const catColor = getCatColor(skill.category)
                   const healthBadge = getHealthBadge(skill.healthScore)
@@ -1559,7 +1574,7 @@ export default function SkillsPortal() {
         </main>
 
         {/* ── FOOTER ── */}
-        <footer className="border-t border-border/30 py-6 text-center text-xs text-muted-foreground mt-auto" role="contentinfo">
+        <footer className="border-t border-border/30 py-4 sm:py-6 text-center text-[10px] sm:text-xs text-muted-foreground mt-auto px-4" role="contentinfo">
           <p>AI Agent Skills Portal — {INSTALLED_SKILLS.length} Skills · {SKILL_COMBOS.length} Stacks · {PLAYBOOKS.length} Playbooks</p>
         </footer>
       </div>
