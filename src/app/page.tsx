@@ -438,12 +438,12 @@ export default function SkillsPortal() {
             <Sparkles className="h-5 w-5 text-amber-400" aria-hidden="true" />
             <span className="font-bold text-sm hidden sm:inline">Skills Portal</span>
           </div>
-          <div className="flex-1 max-w-md mx-auto">
+          <div className="flex-1 min-w-0 max-w-md mx-auto">
             <div className="relative">
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
               <Input
                 placeholder="Search skills, stacks, playbooks..."
-                className="pl-8 h-8 text-xs bg-muted/50 border-border/50"
+                className="pl-8 h-8 text-xs bg-muted/50 border-border/50 min-w-0"
                 value={globalSearch}
                 onChange={(e) => setGlobalSearch(e.target.value)}
                 aria-label="Search skills, stacks, and playbooks"
@@ -465,7 +465,7 @@ export default function SkillsPortal() {
             <Link href="/dev" aria-label="Switch to Developer View">
               <Button variant="outline" size="sm" className="h-7 text-xs gap-1" aria-label="Switch to Developer View">
                 <Terminal className="h-3 w-3" aria-hidden="true" />
-                <span className="hidden sm:inline">Developer View</span>
+                <span className="hidden md:inline">Developer View</span>
               </Button>
             </Link>
             <Button
@@ -550,7 +550,7 @@ export default function SkillsPortal() {
         </AnimatePresence>
 
         {/* ── MAIN CONTENT ── */}
-        <main className="pt-[58px] pb-16 px-4 md:px-16 lg:pl-24 lg:pr-16 max-w-7xl mx-auto flex-1" role="main">
+        <main className="pt-[58px] pb-16 px-4 md:px-16 lg:pl-24 lg:pr-16 w-full max-w-7xl mx-auto flex-1" role="main">
 
           {/* ═══════════════════ 1. HERO ═══════════════════ */}
           <Section id="hero" className="py-16 md:py-24">
@@ -1041,6 +1041,7 @@ export default function SkillsPortal() {
               </div>
               <Card className="bg-card/50 border-border/30 backdrop-blur-sm">
                 <CardContent className="p-0">
+                  <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -1075,6 +1076,7 @@ export default function SkillsPortal() {
                       })}
                     </TableBody>
                   </Table>
+                  </div>
                 </CardContent>
               </Card>
             </div>
